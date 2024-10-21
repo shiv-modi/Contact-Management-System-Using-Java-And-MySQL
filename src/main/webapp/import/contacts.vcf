@@ -1,0 +1,60 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:John Doe
+TEL:+123456789
+EMAIL:john.doe@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Jane Smith
+TEL:+987654321
+EMAIL:jane.smith@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Michael Brown
+TEL:+5551234567
+EMAIL:michael.brown@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Emily Davis
+TEL:+1112223333
+EMAIL:emily.davis@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Chris Johnson
+TEL:+4445556666
+EMAIL:chris.johnson@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Jessica Wilson
+TEL:+7778889999
+EMAIL:jessica.wilson@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:David Miller
+TEL:+2223334444
+EMAIL:david.miller@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Laura Martinez
+TEL:+8887776666
+EMAIL:laura.martinez@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Brian Anderson
+TEL:+3334445555
+EMAIL:brian.anderson@example.com
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Sarah Thomas
+TEL:+9990001111
+EMAIL:sarah.thomas@example.com
+END:VCARD
