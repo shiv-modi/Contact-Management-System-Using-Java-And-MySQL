@@ -1,5 +1,4 @@
-# Contact-Management-System-Using-Java-And-MySQL
-# Code Quest: Contact Management System 📇
+# Contact Management System 📇
 
 ## Description:
 The Contact Management System is a web application that allows users to manage their contacts with functionalities such as adding, editing, removing, viewing, importing, and exporting contacts. This application helps users keep track of their personal or professional contact lists in a user-friendly way.
