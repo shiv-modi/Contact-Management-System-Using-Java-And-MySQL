@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class dbCon {
 	private static final String url = "jdbc:mysql://localhost:3306/cms";
-	private static final String username = "root";
-	private static final String password = "38426511";
+	private static final String username = "YOUR_DB_USERNAME";
+	private static final String password = "YOUR_PASSWORD";
 	
 	static {
 		try {

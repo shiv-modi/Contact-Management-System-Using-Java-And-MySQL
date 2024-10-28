@@ -147,11 +147,37 @@ public class dbUtil implements cmsInt{
 	         PreparedStatement pstmt = connection.prepareStatement(query)) {
 	        pstmt.setInt(1, contactId);
 	        int rowsAffected = pstmt.executeUpdate();
-	        return rowsAffected > 0; // Return true if a row was deleted
+	        return rowsAffected > 0; 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
 	    }
+	}
+	
+	
+	public List<contacts_db> search(int userId , String searchname) {
+		List<contacts_db>cbContacts = new ArrayList<>();
+		String query = "SELECT * FROM contacts WHERE (id = ? AND name = ?) OR (phone = ?) OR (email = ?)";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setString(2,searchname);
+			preparedStatement.setString(3,searchname);
+			preparedStatement.setString(4,searchname);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				contacts_db contacts = new contacts_db();
+				contacts.setName(resultSet.getString("name"));
+				contacts.setEmail(resultSet.getString("email"));
+				contacts.setPhone(resultSet.getString("phone"));
+				contacts.setProfilePhoto(resultSet.getBytes("profile_photo"));
+				cbContacts.add(contacts);
+			}
+			return cbContacts;
+		} catch (SQLException e) {
+			System.out.println("Contact not found");
+		}
+		return null;
 	}
 
 

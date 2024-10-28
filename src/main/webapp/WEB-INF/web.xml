@@ -74,4 +74,14 @@
     <servlet-name>exportContacts</servlet-name>
     <url-pattern>/exportContacts</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>searchServlet</display-name>
+    <servlet-name>searchServlet</servlet-name>
+    <servlet-class>com.cms.Servlet.searchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>searchServlet</servlet-name>
+    <url-pattern>/searchServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

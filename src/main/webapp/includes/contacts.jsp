@@ -82,10 +82,12 @@
      <main class="flex-1 p-8 lg:p-12 bg-gray-50">
             <!-- Search and Add New Button -->
             <div class="flex flex-col lg:flex-row justify-between items-center mb-10 space-y-4 lg:space-y-0">
+            	<form method = "post" action = "../searchServlet">
                 <div class="flex items-center space-x-4 w-full lg:w-auto">
-                    <input type="text" placeholder="Search contacts..." class="border border-gray-300 p-3 rounded-lg w-full lg:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
+                    <input type="text" placeholder="Search contacts..." name = "search" class="border border-gray-300 p-3 rounded-lg w-full lg:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type= "submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
                 </div>
+                </form>
                 <button id="mainAddContactButton" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition duration-300 flex items-center cursor-pointer">
                     <i class="fas fa-user-plus mr-2"></i> Add Contact
                 </button>
@@ -116,32 +118,39 @@
 		       <tbody id="contactsBody">
 			    <%
 			        dbUtil dbutil = new dbUtil();
-			        List<contacts_db> cont = dbutil.getContacts(id);
-			        if (!cont.isEmpty()) {
-			            for (contacts_db c : cont) {
-			                byte[] image_data = c.getProfilePhoto(); // Get the profile photo byte array
+			        // Get the user's contacts
+			        List<contacts_db> cont = dbutil.getContacts(id); 
+			        // Retrieve the search results from the session
+			        List<contacts_db> searchResults = (List<contacts_db>) session.getAttribute("search");
+			
+			        // Use searchResults if it exists and is not empty; otherwise, use all contacts
+			        List<contacts_db> displayContacts = (searchResults != null && !searchResults.isEmpty()) ? searchResults : cont;
+			
+			        if (displayContacts != null && !displayContacts.isEmpty()) {
+			            for (contacts_db c : displayContacts) {
+			                byte[] image_data = c.getProfilePhoto(); 
 			                String base64Image = null;
+			
+			                // Encode the image data if it exists
 			                if (image_data != null) {
 			                    base64Image = Base64.getEncoder().encodeToString(image_data);
 			                }
-			             	request.setAttribute("d", c.getId());
-			          
 			    %>
-			    <tr class="border-b hover:bg-gray-50 transition duration-200 cursor-pointer contact-row" data-contact-id="<%= c.getId() %>">
-			        <td class="py-3 px-5">
-			            <img src="<%= base64Image != null ? "data:image/jpeg;base64," + base64Image : "../img/default.jpg" %>" alt="Profile" class="contact-image">
-			        </td>
-			        <td class="py-3 px-5"><%= c.getName() %></td>
-			        <td class="py-3 px-5"><%= c.getPhone() %></td>
-			        <td class="py-3 px-5"><%= c.getEmail() %></td>
-			    </tr>
+			                <tr class="border-b hover:bg-gray-50 transition duration-200 cursor-pointer contact-row" data-contact-id="<%= c.getId() %>">
+			                    <td class="py-3 px-5">
+			                        <img src="<%= base64Image != null ? "data:image/jpeg;base64," + base64Image : "../img/default.jpg" %>" alt="Profile" class="contact-image">
+			                    </td>
+			                    <td class="py-3 px-5"><%= c.getName() %></td>
+			                    <td class="py-3 px-5"><%= c.getPhone() %></td>
+			                    <td class="py-3 px-5"><%= c.getEmail() %></td>
+			                </tr>
 			    <%
 			            }
 			        } else {
 			    %>
-			    <tr>
-			        <td colspan="4" class="py-3 px-5 text-center text-gray-500">No Contacts Available</td>
-			    </tr>
+			            <tr>
+			                <td colspan="4" class="py-3 px-5 text-center text-gray-500">No Contacts Available</td>
+			            </tr>
 			    <%
 			        }
 			    %>
